@@ -24,6 +24,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/backArrowLoginButton"
+        android:layout_width="50dp"
+        android:layout_height="62dp"
+        android:backgroundTint="#448AFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:srcCompat="@drawable/backarrow" />
+
     <TextView
         android:id="@+id/selectedCar"
         android:layout_width="wrap_content"
@@ -46,7 +55,7 @@
         app:srcCompat="@drawable/web_hi_res_512" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/loginButton2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
@@ -99,14 +108,5 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailLogin" />
-
-    <ImageView
-        android:id="@+id/backArrowLoginButton"
-        android:layout_width="44dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView"
-        app:srcCompat="@drawable/backarrow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

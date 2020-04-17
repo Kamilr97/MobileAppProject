@@ -8,6 +8,20 @@
 
     <!-- Create popup window to add a new car-->
     <Button
+        android:id="@+id/logoutCarsButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#44B4FF"
+        android:text="Logout"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
         android:id="@+id/addCarButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -39,11 +53,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/backArrowLocationButton"
-        android:layout_width="44dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="15dp"
+    <ImageButton
+        android:id="@+id/backArrowCarsButton"
+        android:layout_width="50dp"
+        android:layout_height="62dp"
+        android:backgroundTint="#448AFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView"
         app:srcCompat="@drawable/backarrow" />
@@ -79,7 +93,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="20dp"
         android:text="List cars here. Placeholder to be implemented later using preferred/easiest method"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/logoutCarsButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
