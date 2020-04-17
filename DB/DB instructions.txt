@@ -1,0 +1,10 @@
+1. Open the model file with MYSQL workbench
+2. Once you have it open (you see the diagram) click on the top "Database" => "Synchronize Model"
+3. Select local instance MySQL80 or whichever local connection you'd like to use. click next
+4. ignore sync options, click next
+5. put in your password for your selected database, click next
+6. select mydb, click next
+7. put in your password for your selected database, click next
+8. "select changes to apply" should be set to update your local database with the new model. click next
+9. click execute
+10. put in your password for your selected databaseand click close. You've got a local instance of the database :D
