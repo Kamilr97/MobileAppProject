@@ -27,28 +27,5 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
-    implementation 'com.google.android.gms:play-services-location:17.0.0'
-    implementation 'com.google.android.gms:play-services-nearby:17.0.0'
-    implementation 'com.google.maps.android:android-maps-utils:1.0.2'
-    implementation 'com.google.firebase:firebase-core:16.0.1'
-
-//Firebase Authentication
-    implementation 'com.google.firebase:firebase-auth:16.0.2'
-
-// Firestore Firestore
-    implementation 'com.google.firebase:firebase-firestore:17.0.4'
-
-//Google Play Services for Maps
-    implementation 'com.google.android.gms:play-services-maps:15.0.1'
-
-// Maps utils (required for custom markers)
-    implementation 'com.google.maps.android:android-maps-utils:0.5+'
-
-// Google play services for location information
-    implementation 'com.google.android.gms:play-services-location:15.0.1'
-
-// Google Maps Services (needed for directions)
-    implementation 'com.google.maps:google-maps-services:0.2.9'
-    implementation 'org.slf4j:slf4j-nop:1.7.25'
 
 }
