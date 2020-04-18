@@ -109,4 +109,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailLogin" />
 
+    <TextView
+        android:id="@+id/test"
+        android:layout_width="70dp"
+        android:layout_height="82dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backArrowLoginButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
