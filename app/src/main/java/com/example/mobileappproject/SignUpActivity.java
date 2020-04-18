@@ -14,6 +14,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -21,35 +24,54 @@ public class SignUpActivity extends AppCompatActivity {
     Button signUp;
     EditText email;
     EditText password;
+    EditText retypePassword;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 
         signUp = findViewById(R.id.signUpButton2);
         back = findViewById(R.id.backArrowSignUpButton);
 
         email = findViewById(R.id.emailSignUp);
         password = findViewById(R.id.passwordSignUp);
+        retypePassword = findViewById(R.id.retypePasswordSignUp);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(SignUpActivity.this, "Registered Successfully", Toast.LENGTH_LONG).show();
-                        }else {
-                            Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+                String pswd1 = password.getText().toString();
+                String pswd2 = retypePassword.getText().toString();
+                if (!pswd1.equals(pswd2)) {
+                    Toast.makeText(SignUpActivity.this, "Passwords must match", Toast.LENGTH_LONG).show();
+                } else {
+                    mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                String UserId = user.getUid();
 
-                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                                mDatabase.child(UserId).child("family").setValue(0);
+                                //replace placeholder Test with user input
+                                mDatabase.child(UserId).child("name").setValue("Test");
+
+                                Toast.makeText(SignUpActivity.this, "Registered Successfully", Toast.LENGTH_LONG).show();
+
+                            } else {
+                                Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+
+                    startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                }
             }
         });
 
