@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
@@ -19,6 +20,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.Console;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -37,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
         test = findViewById(R.id.test);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Cars").child("0");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Cars").child("1");
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -68,4 +72,5 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
 }

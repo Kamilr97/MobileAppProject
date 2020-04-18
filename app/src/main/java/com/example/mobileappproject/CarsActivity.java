@@ -3,6 +3,7 @@ package com.example.mobileappproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -17,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CarsActivity extends AppCompatActivity {
@@ -26,6 +28,9 @@ public class CarsActivity extends AppCompatActivity {
     ListView carsList;
 
     DatabaseReference mDatabase;
+
+    List<String> list = new ArrayList<>();
+    ArrayAdapter<String> adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,11 +43,24 @@ public class CarsActivity extends AppCompatActivity {
         //addCar = findViewById(R.id.addCarButton);
         carsList = findViewById(R.id.carsList);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Cars").child("0");
+        list = new ArrayList<String>();
+
+        adapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+                list );
+
+        carsList.setAdapter(adapter);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Cars");
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String name = dataSnapshot.child("name").getValue().toString();
+
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                  String name = ds.child("name").getValue().toString();
+                    adapter.add(name);
+                }
 
             }
 
