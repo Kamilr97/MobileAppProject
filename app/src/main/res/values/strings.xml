@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MobileAppProject</string>
+    <string name="google_map_api_key">AIzaSyBx9GTDX9MDf63nmdHCwALzuXfHLmZgSXI</string>
 </resources>
