@@ -7,6 +7,19 @@
     tools:context=".MainActivity">
 
     <!-- Need to add popup window for create a family button-->
+
+    <TextView
+        android:id="@+id/familyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Join A Family"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createFamilyButton" />
+
     <Button
         android:id="@+id/logoutFamilyButton"
         android:layout_width="0dp"
@@ -99,20 +112,20 @@
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:srcCompat="@drawable/settings" />
 
-    <!-- Need to implement a way to view families-->
-    <TextView
-        android:id="@+id/placeholder"
+    <ListView
+        android:id="@+id/listUsers"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:text="Listed Families.This is a placeholder. Not sure what the easiest way to implement this would be."
         app:layout_constraintBottom_toTopOf="@+id/logoutFamilyButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createFamilyButton" />
+        app:layout_constraintTop_toBottomOf="@+id/familyName" />
+
+    <!-- Need to implement a way to view families-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
