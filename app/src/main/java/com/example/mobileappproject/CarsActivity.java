@@ -27,7 +27,6 @@ import java.util.List;
 
 public class CarsActivity extends AppCompatActivity {
     ImageButton back;
-    Button logout;
     Button addCar;
     ListView carsList;
 
@@ -53,7 +52,6 @@ public class CarsActivity extends AppCompatActivity {
         family = "";
 
         back = findViewById(R.id.backArrowCarsButton);
-        logout = findViewById(R.id.logoutCarsButton);
         addCar = findViewById(R.id.addCarButton);
         carsList = findViewById(R.id.carsList);
 
@@ -110,12 +108,7 @@ public class CarsActivity extends AppCompatActivity {
                 finish();
             }
         });
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(CarsActivity.this, MainActivity.class));
-            }
-        });
+
         addCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

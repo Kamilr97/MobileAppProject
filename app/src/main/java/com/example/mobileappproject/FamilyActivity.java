@@ -27,8 +27,8 @@ import java.util.List;
 public class FamilyActivity extends AppCompatActivity {
     ImageButton back;
     Button logout;
-    //Button joinFamily;
-    //Button createFamily;
+    Button joinFamily;
+    Button createFamily;
     TextView familyName;
     ListView listUsers;
 
@@ -45,9 +45,8 @@ public class FamilyActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
 
         back = findViewById(R.id.backArrowFamilyButton);
-        logout = findViewById(R.id.logoutFamilyButton);
-        //joinFamily = findViewById(R.id.joinFamilyButton);
-        //createFamily = findViewById(R.id.createFamilyButton);
+        joinFamily = findViewById(R.id.joinFamilyButton);
+        createFamily = findViewById(R.id.createFamilyButton);
         familyName = findViewById(R.id.familyName);
         listUsers = findViewById(R.id.listUsers);
 
@@ -82,6 +81,19 @@ public class FamilyActivity extends AppCompatActivity {
 
             }
         });
+        joinFamily.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FamilyActivity.this, JoinFamilyActivity.class));
+            }
+        });
+
+        createFamily.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FamilyActivity.this, CreateFamilyActivity.class));
+            }
+        });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,11 +101,6 @@ public class FamilyActivity extends AppCompatActivity {
                 finish();
             }
         });
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(FamilyActivity.this, MainActivity.class));
-            }
-        });
+
     }
 }

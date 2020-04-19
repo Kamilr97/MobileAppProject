@@ -31,7 +31,6 @@ import java.util.Map;
 public class CreateFamilyActivity extends AppCompatActivity {
 
     ImageButton back;
-    Button logout;
 
     EditText familyName;
     Button createFamily;
@@ -56,15 +55,14 @@ public class CreateFamilyActivity extends AppCompatActivity {
         createFamily = findViewById(R.id.createFamilyButton);
 
         back = findViewById(R.id.backArrowFamilyButton);
-        logout = findViewById(R.id.logoutFamilyButton);
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Families");
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-              familyList = dataSnapshot.getChildren();
-                for(DataSnapshot ds : familyList){
-                        list.add(ds.getKey());
+                familyList = dataSnapshot.getChildren();
+                for (DataSnapshot ds : familyList) {
+                    list.add(ds.getKey());
                 }
             }
 
@@ -82,8 +80,8 @@ public class CreateFamilyActivity extends AppCompatActivity {
                 } else {
                     familyExists = false;
                     String currentName = familyName.getText().toString();
-                    for (String temp : list){
-                        if (currentName.equalsIgnoreCase(temp)){
+                    for (String temp : list) {
+                        if (currentName.equalsIgnoreCase(temp)) {
                             familyExists = true;
                             break;
                         }
@@ -105,13 +103,7 @@ public class CreateFamilyActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CreateFamilyActivity.this, FamilyActivity.class));
-            }
-        });
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(CreateFamilyActivity.this, MainActivity.class));
+                finish();
             }
         });
 

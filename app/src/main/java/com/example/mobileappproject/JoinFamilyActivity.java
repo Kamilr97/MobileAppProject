@@ -1,8 +1,10 @@
 package com.example.mobileappproject;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,7 +22,7 @@ import java.util.List;
 public class JoinFamilyActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
-    Button logout;
+    ImageButton back;
     Button joinFamily;
 
     TextView selectedFamily;
@@ -36,10 +38,17 @@ public class JoinFamilyActivity extends AppCompatActivity {
 
         FirebaseApp.initializeApp(this);
 
+        back = findViewById(R.id.backArrowFamilyButton);
 
         final String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Families");
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }
