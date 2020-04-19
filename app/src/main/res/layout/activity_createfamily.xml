@@ -85,7 +85,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <Button
         android:id="@+id/createFamilyButton"
@@ -102,14 +102,14 @@
         app:layout_constraintTop_toBottomOf="@+id/enterFamilyName" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageView5"
         android:layout_width="179dp"
-        android:layout_height="265dp"
+        android:layout_height="256dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/familyBigger" />
+        app:srcCompat="@drawable/familybigger" />
 
     <!-- Need to implement a way to view families-->
 
