@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,7 +29,8 @@ public class CarsActivity extends AppCompatActivity {
     //Button addCar;
     ListView carsList;
 
-    DatabaseReference mDatabase;
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
 
     List<String> list = new ArrayList<>();
     ArrayAdapter<String> adapter;
@@ -37,6 +40,8 @@ public class CarsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_cars);
+
+        mAuth = FirebaseAuth.getInstance();
 
         back = findViewById(R.id.backArrowCarsButton);
         logout = findViewById(R.id.logoutCarsButton);
@@ -52,13 +57,19 @@ public class CarsActivity extends AppCompatActivity {
 
         carsList.setAdapter(adapter);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Cars");
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                FirebaseUser user = mAuth.getCurrentUser();
+                String UserId = user.getUid();
+                //gets name of family
+                String family = dataSnapshot.child("Users").child(UserId).child("family").getValue().toString();
 
-                for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                  String name = ds.child("name").getValue().toString();
+                //iterates through cars held in Families
+                for(DataSnapshot ds : dataSnapshot.child("Families").child(family).child("cars").getChildren()) {
+                    //gets name of car from Cars
+                    String name = dataSnapshot.child("Cars").child(ds.getKey()).child("name").getValue().toString();
                     adapter.add(name);
                 }
 
