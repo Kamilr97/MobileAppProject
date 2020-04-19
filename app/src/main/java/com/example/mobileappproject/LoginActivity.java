@@ -55,25 +55,30 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(LoginActivity.this, "Log In Successful", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                        }else {
-                            Toast.makeText(LoginActivity.this, "E-mail or Password is incorrect", Toast.LENGTH_LONG).show();
+                if(email.getText().toString().equals("") ||  password.getText().toString().equals("")){
+                    Toast.makeText(LoginActivity.this, "Email or password is invalid", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(LoginActivity.this, "Log In Successful", Toast.LENGTH_LONG).show();
+                                password.setText("");
+                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                            } else {
+                                Toast.makeText(LoginActivity.this, "E-mail or Password is incorrect", Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
-                });
-                
+                    });
+                }
             }
         });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
             }
         });
     }

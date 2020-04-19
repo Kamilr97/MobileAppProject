@@ -3,6 +3,7 @@ package com.example.mobileappproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -21,19 +22,23 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class CarsActivity extends AppCompatActivity {
     ImageButton back;
     Button logout;
-    //Button addCar;
+    Button addCar;
     ListView carsList;
 
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
 
     List<String> list = new ArrayList<>();
+    HashMap<String, String> cars;
     ArrayAdapter<String> adapter;
+    String username;
+    String family;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,13 +47,18 @@ public class CarsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cars);
 
         mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        final String UserId = user.getUid();
+        username = "";
+        family = "";
 
         back = findViewById(R.id.backArrowCarsButton);
         logout = findViewById(R.id.logoutCarsButton);
-        //addCar = findViewById(R.id.addCarButton);
+        addCar = findViewById(R.id.addCarButton);
         carsList = findViewById(R.id.carsList);
 
         list = new ArrayList<String>();
+        cars = new HashMap<String, String>();
 
         adapter = new ArrayAdapter<String>(
                 this,
@@ -58,21 +68,34 @@ public class CarsActivity extends AppCompatActivity {
         carsList.setAdapter(adapter);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        carsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object o = carsList.getItemAtPosition(position);
+                String str = o.toString();
+                Intent i = new Intent(CarsActivity.this, LocationsActivity.class);
+                i.putExtra("carID", cars.get(str));
+                i.putExtra("user", username);
+                startActivity(i);
+            }
+        });
+
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                FirebaseUser user = mAuth.getCurrentUser();
-                String UserId = user.getUid();
                 //gets name of family
-                String family = dataSnapshot.child("Users").child(UserId).child("family").getValue().toString();
+                family = dataSnapshot.child("Users").child(UserId).child("family").getValue().toString();
+                username = dataSnapshot.child("Users").child(UserId).child("name").getValue().toString();
 
                 //iterates through cars held in Families
+                adapter.clear();
                 for(DataSnapshot ds : dataSnapshot.child("Families").child(family).child("cars").getChildren()) {
                     //gets name of car from Cars
                     String name = dataSnapshot.child("Cars").child(ds.getKey()).child("name").getValue().toString();
+                    cars.put(name, ds.getKey().toString());
                     adapter.add(name);
                 }
-
             }
 
             @Override
@@ -84,13 +107,21 @@ public class CarsActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CarsActivity.this, HomeActivity.class));
+                finish();
             }
         });
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(CarsActivity.this, MainActivity.class));
+            }
+        });
+        addCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(CarsActivity.this, AddCarActivity.class);
+                i.putExtra("family", family);
+                startActivity(i);
             }
         });
     }

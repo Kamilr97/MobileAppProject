@@ -84,7 +84,7 @@ public class FamilyActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FamilyActivity.this, HomeActivity.class));
+                finish();
             }
         });
         logout.setOnClickListener(new View.OnClickListener() {
