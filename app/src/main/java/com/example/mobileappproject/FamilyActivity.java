@@ -66,7 +66,9 @@ public class FamilyActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     String family = dataSnapshot.child("Users").child(currentUser).child("family").getValue().toString();
-                    familyName.setText(family);
+                    if (!family.equalsIgnoreCase("0")){
+                        familyName.setText(family);
+                    }
 
                 for(DataSnapshot ds : dataSnapshot.child("Families").child(family).child("users").getChildren()) {
                     String userKey = ds.getKey();
