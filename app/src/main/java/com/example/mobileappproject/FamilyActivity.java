@@ -55,7 +55,7 @@ public class FamilyActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,
-                list );
+                list);
         listUsers.setAdapter(adapter);
 
         final String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -64,12 +64,13 @@ public class FamilyActivity extends AppCompatActivity {
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String family = dataSnapshot.child("Users").child(currentUser).child("family").getValue().toString();
-                    if (!family.equalsIgnoreCase("0")){
-                        familyName.setText(family);
-                    }
+                String family = dataSnapshot.child("Users").child(currentUser).child("family").getValue().toString();
+                if (!family.equalsIgnoreCase("0")) {
+                    familyName.setText(family);
+                }
 
-                for(DataSnapshot ds : dataSnapshot.child("Families").child(family).child("users").getChildren()) {
+                adapter.clear();
+                for (DataSnapshot ds : dataSnapshot.child("Families").child(family).child("users").getChildren()) {
                     String userKey = ds.getKey();
                     String user = dataSnapshot.child("Users").child(userKey).child("name").getValue().toString();
                     adapter.add(user);

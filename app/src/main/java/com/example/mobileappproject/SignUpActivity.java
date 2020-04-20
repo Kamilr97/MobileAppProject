@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SignUpActivity extends AppCompatActivity {
     ImageButton back;
     Button signUp;
+    EditText nameSignUp;
     EditText email;
     EditText password;
     EditText retypePassword;
@@ -39,6 +40,7 @@ public class SignUpActivity extends AppCompatActivity {
         signUp = findViewById(R.id.signUpButton2);
         back = findViewById(R.id.backArrowSignUpButton);
 
+        nameSignUp = findViewById(R.id.nameSignUp);
         email = findViewById(R.id.emailSignUp);
         password = findViewById(R.id.passwordSignUp);
         retypePassword = findViewById(R.id.retypePasswordSignUp);
@@ -59,8 +61,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 String UserId = user.getUid();
 
                                 mDatabase.child(UserId).child("family").setValue(0);
-                                //replace placeholder Test with user input
-                                mDatabase.child(UserId).child("name").setValue("Test");
+                                mDatabase.child(UserId).child("name").setValue(nameSignUp.getText().toString());
 
                                 Toast.makeText(SignUpActivity.this, "Registered Successfully", Toast.LENGTH_LONG).show();
 

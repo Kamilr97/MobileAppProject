@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -72,10 +73,15 @@ public class CarsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object o = carsList.getItemAtPosition(position);
                 String str = o.toString();
-                Intent i = new Intent(CarsActivity.this, LocationsActivity.class);
-                i.putExtra("carID", cars.get(str));
-                i.putExtra("user", username);
-                startActivity(i);
+                if(str.equals("Please Join a Family") || str.equals("Please Add a Car")){
+                    Toast.makeText(CarsActivity.this, str, Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Intent i = new Intent(CarsActivity.this, LocationsActivity.class);
+                    i.putExtra("carID", cars.get(str));
+                    i.putExtra("user", username);
+                    startActivity(i);
+                }
             }
         });
 
@@ -93,6 +99,9 @@ public class CarsActivity extends AppCompatActivity {
                     String name = dataSnapshot.child("Cars").child(ds.getKey()).child("name").getValue().toString();
                     cars.put(name, ds.getKey().toString());
                     adapter.add(name);
+                }
+                if(cars.containsValue("1") && cars.size() > 1 ){
+                    mDatabase.child("Families").child(family).child("cars").child("1").removeValue();
                 }
             }
 
@@ -112,9 +121,14 @@ public class CarsActivity extends AppCompatActivity {
         addCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(CarsActivity.this, AddCarActivity.class);
-                i.putExtra("family", family);
-                startActivity(i);
+                if(list.contains("Please Join a Family")){
+                    Toast.makeText(CarsActivity.this, "Please Join a Family", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Intent i = new Intent(CarsActivity.this, AddCarActivity.class);
+                    i.putExtra("family", family);
+                    startActivity(i);
+                }
             }
         });
     }

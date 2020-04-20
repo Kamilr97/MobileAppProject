@@ -9,18 +9,6 @@
 
     <!-- Need to add popup window for create a family button-->
 
-    <TextView
-        android:id="@+id/selectedFamilyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="Selected Family"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/joinChosenFamily"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:id="@+id/joinChosenFamily"
         android:layout_width="0dp"
@@ -86,22 +74,8 @@
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:srcCompat="@drawable/settings" />
 
-    <ListView
-        android:id="@+id/familyList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/selectedFamilyText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
-
-    <EditText
-        android:id="@+id/editText3"
+    <AutoCompleteTextView
+        android:id="@+id/searchBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
@@ -119,9 +93,10 @@
         android:layout_height="46dp"
         android:layout_marginTop="20dp"
         android:backgroundTint="#44B4FF"
-        app:layout_constraintStart_toEndOf="@+id/editText3"
+        app:layout_constraintStart_toEndOf="@+id/searchBox"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/searchicon" />
+
 
     <!-- Need to implement a way to view families-->
 

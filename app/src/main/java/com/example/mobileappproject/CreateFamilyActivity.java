@@ -89,10 +89,11 @@ public class CreateFamilyActivity extends AppCompatActivity {
                     familyDatabase = FirebaseDatabase.getInstance().getReference();
                     String createdName = familyName.getText().toString();
                     if (!familyExists) {
-                        familyDatabase.child("Families").child(createdName).child("cars").child("0").setValue("true");
+                        familyDatabase.child("Families").child(createdName).child("cars").child("1").setValue("true");
                         familyDatabase.child("Families").child(createdName).child("users").child(currentUser).setValue("true");
+                        familyDatabase.child("Users").child(currentUser).child("family").setValue(createdName);
                         Toast.makeText(CreateFamilyActivity.this, "Family Created Successfully", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(CreateFamilyActivity.this, FamilyActivity.class));
+                        finish();
                     } else {
                         Toast.makeText(CreateFamilyActivity.this, "A family with the same name already exists. Please change name or try joining a family.", Toast.LENGTH_SHORT).show();
                     }
